@@ -1,4 +1,4 @@
-package vanilla.di;
+package vanilla.di.processors;
 
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.JavaFile;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Set;
 
 
-@SupportedAnnotationTypes("vanilla.di.Vanilla")
+@SupportedAnnotationTypes("vanilla.di.annotations.Vanilla")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
 public class VanillaProcessor extends AbstractProcessor {

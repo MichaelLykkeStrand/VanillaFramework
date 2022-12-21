@@ -1,20 +1,22 @@
 package vanilla.di;
 
+import vanilla.di.processors.VanillaAnnotationProcessor;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
 public class VanillaApplication {
-    public static DependencyInjector dependencyInjector;
+    public static DependencyRegistry dependencyRegistry;
     public VanillaApplication() throws IOException, ClassNotFoundException {
-        dependencyInjector = new DependencyInjector();
+        dependencyRegistry = new DependencyRegistry();
         try {
             List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses();
             List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses();
             this.resolveInstantiatedDependencies(instantiatedClasses);
 
-            dependencyInjector.registerDependencies(annotatedClasses);
-            dependencyInjector.resolveDependencies();
+            dependencyRegistry.registerDependencies(annotatedClasses);
+            dependencyRegistry.resolveDependencies();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -23,10 +25,10 @@ public class VanillaApplication {
         }
     }
 
-    private void resolveInstantiatedDependencies(List<Class<?>> classes) throws ClassNotFoundException, IllegalAccessException {
+    private void resolveInstantiatedDependencies(List<Class<?>> classes) throws IllegalAccessException {
         for (Class cls: classes) {
             Object dependency = this.resolveInstantiatedDependency(cls);
-            this.dependencyInjector.registerDependency(cls,dependency);
+            this.dependencyRegistry.registerDependency(cls,dependency);
 
         }
     }

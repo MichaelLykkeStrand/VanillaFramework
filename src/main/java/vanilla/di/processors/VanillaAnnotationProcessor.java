@@ -1,6 +1,7 @@
-package vanilla.di;
+package vanilla.di.processors;
 
 import com.google.common.reflect.ClassPath;
+import vanilla.di.annotations.Vanilla;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,9 +23,9 @@ public class VanillaAnnotationProcessor {
                 continue;
             }
 
-            // Check if the class is annotated with the vanilla.di.Vanilla annotation
+            // Check if the class is annotated with the vanilla.di.annotations.Vanilla annotation
             if (cls.isAnnotationPresent(Vanilla.class)) {
-                System.out.println("vanilla.di.Vanilla Found Class: "+cls.getName());
+                System.out.println("vanilla.di.annotations.Vanilla Found Class: "+cls.getName());
                 annotatedClasses.add(cls);
             }
         }
@@ -46,9 +47,9 @@ public class VanillaAnnotationProcessor {
                 continue;
             }
 
-            // Check if the class is annotated with the vanilla.di.Vanilla annotation
+            // Check if the class is annotated with the vanilla.di.annotations.Vanilla annotation
             if (cls.isAnnotationPresent(Vanilla.class)) {
-                System.out.println("vanilla.di.Vanilla Found Class: "+cls.getName());
+                System.out.println("vanilla.di.annotations.Vanilla Found Class: "+cls.getName());
                 annotatedClasses.add(cls);
             }
         }
