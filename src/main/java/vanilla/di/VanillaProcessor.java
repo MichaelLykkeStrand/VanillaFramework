@@ -1,14 +1,12 @@
 package vanilla.di;
 
+import com.google.auto.service.AutoService;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
+import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 import javax.tools.Diagnostic;
@@ -18,13 +16,14 @@ import java.util.Set;
 
 
 @SupportedAnnotationTypes("vanilla.di.Vanilla")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
+@AutoService(Processor.class)
 public class VanillaProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Vanilla is Processing annotations...");
         for (TypeElement annotatedClass : annotations) {
             try {
-                processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Processing annotations...");
                 // Create a new Java file object for the modified class
                 String className = annotatedClass.getSimpleName() + "Modified";
                 JavaFileObject file = processingEnv.getFiler().createSourceFile(className);
