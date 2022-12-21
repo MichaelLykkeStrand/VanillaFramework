@@ -1,6 +1,7 @@
 
 # # Vanilla - A Lightweight IOC Framework
 Vanilla is a lightweight and minimalistic IOC (Inversion of Control) framework designed to work seamlessly with modding frameworks such as Fabric.
+
 **#Features**
  1. Easy to use and integrate into your project
  2. Support for runtime changes to the classpath through "plugin" jar files (available in future updates)
