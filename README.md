@@ -20,4 +20,22 @@ Example
       // Other code here
     }
 ```
-Vanilla is a great choice for those looking for a simple yet powerful IOC solution for their modding projects. Give it a try and see how it can streamline your development process.
+It is possible to inject dependencies into Mixins as well. Classes annotated with both @Mixin and @Vanilla will not be accessible in the IOC registry. However it is still possible to inject dependencies from the IOC registry into your Mixin attributes.
+Example 2
+```java
+    @Vanilla
+    @Mixin(MinecraftClient.class)
+    public class ExampleMixinClass {
+      @VanillaAutoInject
+      private Dependency dependency; // Will work!
+      @VanillaAutoInject
+      private ExampleMixinClass myMixin // Won't work!
+
+      // Other code here
+    }
+```
+
+Vanilla is a great choice for those looking for a simple yet powerful IOC solution for their modding projects. 
+Give it a try and see how it can streamline your development process.
+
+
