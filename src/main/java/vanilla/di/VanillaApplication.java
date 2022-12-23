@@ -7,16 +7,16 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class VanillaApplication {
-    public static DependencyRegistry dependencyRegistry;
+    public static DependencyInjector dependencyInjector;
     public VanillaApplication() throws IOException, ClassNotFoundException {
-        dependencyRegistry = new DependencyRegistry();
+        dependencyInjector = new DependencyInjector();
         try {
             List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses();
             List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses();
             this.resolveInstantiatedDependencies(instantiatedClasses);
 
-            dependencyRegistry.registerDependencies(annotatedClasses);
-            dependencyRegistry.resolveDependencies();
+            dependencyInjector.registerDependencies(annotatedClasses);
+            dependencyInjector.resolveDependencies();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -28,7 +28,7 @@ public class VanillaApplication {
     private void resolveInstantiatedDependencies(List<Class<?>> classes) throws IllegalAccessException {
         for (Class cls: classes) {
             Object dependency = this.resolveInstantiatedDependency(cls);
-            this.dependencyRegistry.registerDependency(cls,dependency);
+            this.dependencyInjector.registerDependency(cls,dependency);
 
         }
     }
@@ -37,6 +37,7 @@ public class VanillaApplication {
     private Object resolveInstantiatedDependency(Class cls) throws IllegalAccessException {
         // Get an array of Field objects representing the fields declared in the class
         Field[] fields = cls.getDeclaredFields();
+        if(fields == null) return null;
 
         // Iterate over the array of fields and get the value of each field
         for (Field field : fields) {

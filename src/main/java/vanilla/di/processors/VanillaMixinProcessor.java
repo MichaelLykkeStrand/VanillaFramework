@@ -18,11 +18,12 @@ import java.util.Set;
 @SupportedAnnotationTypes("vanilla.di.annotations.Vanilla")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @AutoService(Processor.class)
-public class VanillaProcessor extends AbstractProcessor {
+public class VanillaMixinProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Vanilla is Processing annotations...");
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Vanilla is Processing Mixin annotations...");
         for (TypeElement annotatedClass : annotations) {
+            boolean hasMixin = annotatedClass.getClass().isAnnotationPresent(Mixin.class);
             try {
                 // Create a new Java file object for the modified class
                 String className = annotatedClass.getSimpleName() + "Modified";

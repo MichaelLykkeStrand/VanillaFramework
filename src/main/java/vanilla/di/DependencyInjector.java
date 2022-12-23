@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DependencyRegistry {
+public class DependencyInjector {
     private final Map<Class, Object> dependencies;
 
-    public DependencyRegistry() {
+    public DependencyInjector() {
         dependencies = new HashMap<>();
     }
 
@@ -20,7 +20,7 @@ public class DependencyRegistry {
             if(dependencies.containsKey(cls)) return;
             Object dependency = cls.newInstance();
             dependencies.put(cls, dependency);
-            System.out.println("Vanilla Added new Instance of: "+dependency.toString());
+            System.out.println("Vanilla Added new Instance of: "+dependency);
         } catch (Exception e) {
             throw new RuntimeException("Error registering dependency " + cls.getName(), e);
         }
