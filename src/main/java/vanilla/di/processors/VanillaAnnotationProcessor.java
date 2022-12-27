@@ -38,7 +38,7 @@ public class VanillaAnnotationProcessor {
 
         // Get all the classes on the classpath
         for (ClassPath.ClassInfo classInfo : classPath.getAllClasses()) {
-            if(!classInfo.getName().toLowerCase().contains("mixin") && !classInfo.getPackageName().toLowerCase().contains("net.fabricmc.unbreakable")) continue;
+            if(!classInfo.getName().toLowerCase().contains("mixin") && !classInfo.getPackageName().toLowerCase().contains("net.fabricmc.unbreakable")) continue; //TODO make this generic
             // Load the class
             Class<?> cls;
             try {
