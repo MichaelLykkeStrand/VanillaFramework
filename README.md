@@ -44,7 +44,7 @@ Give it a try and see how it can streamline your development process.
 
 ## **#Setup**
 To add the library to your project you need to add the following to your **build.gradle** file.
-```groovy
+```java
 dependencies {
 	implementation 'net.unbreakable:vanilla-di:0.0.3' // Ensure you are on the latest version
 }
