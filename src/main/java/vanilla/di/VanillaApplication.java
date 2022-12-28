@@ -10,14 +10,15 @@ import java.util.List;
 public class VanillaApplication {
     public static DependencyInjector dependencyInjector;
 
-    public VanillaApplication(Class cls) throws IOException, ClassNotFoundException {
+    public VanillaApplication(Class cls){
         new VanillaApplication(cls,new VanillaLaunchArgs(""));
     }
-    public VanillaApplication(Class cls, VanillaLaunchArgs vanillaLaunchArgs) throws IOException, ClassNotFoundException {
+    public VanillaApplication(Class cls, VanillaLaunchArgs vanillaLaunchArgs) {
         dependencyInjector = new DependencyInjector();
         try {
-            List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses(cls.getPackageName(), vanillaLaunchArgs.excludeClassesContaining());
-            List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses(cls.getPackageName(), vanillaLaunchArgs.excludeClassesContaining());
+            String pkg = cls.getPackageName();
+            List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses(pkg, vanillaLaunchArgs.excludeClassesContaining());
+            List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses(pkg, vanillaLaunchArgs.excludeClassesContaining());
             this.resolveInstantiatedDependencies(instantiatedClasses);
 
             dependencyInjector.registerDependencies(annotatedClasses);

@@ -38,7 +38,7 @@ public class VanillaAnnotationProcessor {
 
         // Get all the classes on the classpath
         for (ClassPath.ClassInfo classInfo : classPath.getAllClasses()) {
-            if(!classInfo.getName().toLowerCase().contains(exclude) && !classInfo.getPackageName().toLowerCase().contains(path)) continue; //TODO make this generic
+            if(!classInfo.getName().toLowerCase().contains(exclude) && !classInfo.getPackageName().toLowerCase().contains(path)) continue; //TODO optimize using reflection library
             // Load the class
             Class<?> cls;
             try {

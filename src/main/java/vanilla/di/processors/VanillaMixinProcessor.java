@@ -23,7 +23,7 @@ public class VanillaMixinProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Vanilla is Processing Mixin annotations...");
         for (TypeElement annotatedClass : annotations) {
-            boolean hasMixin = annotatedClass.getClass().isAnnotationPresent(Mixin.class);
+            //boolean hasMixin = annotatedClass.getClass().isAnnotationPresent(Mixin.class);
             try {
                 // Create a new Java file object for the modified class
                 String className = annotatedClass.getSimpleName() + "Modified";
