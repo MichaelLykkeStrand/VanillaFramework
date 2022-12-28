@@ -1,4 +1,5 @@
 
+
 # # Vanilla - A Lightweight IOC Framework
 Vanilla is a lightweight and minimalistic IOC (Inversion of Control) framework designed to work seamlessly with modding frameworks such as Fabric.
 
@@ -7,6 +8,25 @@ Vanilla is a lightweight and minimalistic IOC (Inversion of Control) framework d
  2. Support for runtime changes to the classpath through "plugin" jar files (available in future updates)
  3. Annotation based with @Vanilla to instantiate classes and @VanillaAutoInject to inject fields at runtime
  4. No need for getters, setters, or constructor injection
+
+**#Setup**
+To add the library to your project you need to add the following to your **build.gradle**
+```groovy
+dependencies {
+	implementation 'net.unbreakable:vanilla-di:0.0.3' // Ensure you are on the latest version
+}
+```
+Adding the framework to your application. Notably the class containing the **main entry point** has to be a the top level of your project, that is the package containing all **your** classes. This is required for discovering and constructing the application context.
+![enter image description here](https://cdn.discordapp.com/attachments/943839120634052639/1057541826661326858/image.png)
+
+Below is an example of what I 
+```java
+class YourApplication {  
+    public static void main(String[] args){  
+        VanillaApplication vanillaApplication = new VanillaApplication(YourApplication.class);  
+  }  
+}
+```
 
 **#Usage**
 To use Vanilla, simply annotate your classes with @Vanilla and the framework will handle the instantiation and injection of fields marked with @VanillaAutoInject.
