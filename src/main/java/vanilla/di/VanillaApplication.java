@@ -1,16 +1,24 @@
 package vanilla.di;
 
+import vanilla.di.args.VanillaLaunchArgs;
+import vanilla.di.processors.VanillaAnnotationProcessor;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
 public class VanillaApplication {
     public static DependencyInjector dependencyInjector;
-    public VanillaApplication() throws IOException, ClassNotFoundException {
+
+    public VanillaApplication(Class cls){
+        new VanillaApplication(cls,new VanillaLaunchArgs(""));
+    }
+    public VanillaApplication(Class cls, VanillaLaunchArgs vanillaLaunchArgs) {
         dependencyInjector = new DependencyInjector();
         try {
-            List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses();
-            List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses();
+            String pkg = cls.getPackageName();
+            List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses(pkg, vanillaLaunchArgs.excludeClassesContaining());
+            List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses(pkg, vanillaLaunchArgs.excludeClassesContaining());
             this.resolveInstantiatedDependencies(instantiatedClasses);
 
             dependencyInjector.registerDependencies(annotatedClasses);
@@ -23,7 +31,7 @@ public class VanillaApplication {
         }
     }
 
-    private void resolveInstantiatedDependencies(List<Class<?>> classes) throws ClassNotFoundException, IllegalAccessException {
+    private void resolveInstantiatedDependencies(List<Class<?>> classes) throws IllegalAccessException {
         for (Class cls: classes) {
             Object dependency = this.resolveInstantiatedDependency(cls);
             this.dependencyInjector.registerDependency(cls,dependency);
@@ -35,6 +43,7 @@ public class VanillaApplication {
     private Object resolveInstantiatedDependency(Class cls) throws IllegalAccessException {
         // Get an array of Field objects representing the fields declared in the class
         Field[] fields = cls.getDeclaredFields();
+        if(fields == null) return null;
 
         // Iterate over the array of fields and get the value of each field
         for (Field field : fields) {
