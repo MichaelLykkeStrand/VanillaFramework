@@ -43,7 +43,7 @@ Give it a try and see how it can streamline your development process.
 
 
 ## **#Setup**
-To add the library to your project you need to add the following to your **build.gradle**
+To add the library to your project you need to add the following to your **build.gradle** file.
 ```groovy
 dependencies {
 	implementation 'net.unbreakable:vanilla-di:0.0.3' // Ensure you are on the latest version
@@ -53,7 +53,7 @@ Adding the framework to your application. Notably the class containing the **mai
 
 ![enter image description here](https://cdn.discordapp.com/attachments/943839120634052639/1057541826661326858/image.png)
 
-Below is an example of how to setup the **Vanilla Application Context**
+Below is an example of how to setup the **Vanilla Application Context.**
 ```java
 class YourApplication {  
     public static void main(String[] args){  
