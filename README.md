@@ -53,7 +53,7 @@ Adding the framework to your application. Notably the class containing the **mai
 
 ![enter image description here](https://cdn.discordapp.com/attachments/943839120634052639/1057541826661326858/image.png)
 
-Below is an example of what I 
+Below is an example of how to setup the **Vanilla Application Context**
 ```java
 class YourApplication {  
     public static void main(String[] args){  
