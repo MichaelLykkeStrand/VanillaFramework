@@ -1,5 +1,6 @@
 package vanilla.di;
 
+import vanilla.di.args.VanillaLaunchArgs;
 import vanilla.di.processors.VanillaAnnotationProcessor;
 
 import java.io.IOException;
@@ -8,11 +9,15 @@ import java.util.List;
 
 public class VanillaApplication {
     public static DependencyInjector dependencyInjector;
-    public VanillaApplication() throws IOException, ClassNotFoundException {
+
+    public VanillaApplication(Class cls) throws IOException, ClassNotFoundException {
+        new VanillaApplication(cls,new VanillaLaunchArgs(""));
+    }
+    public VanillaApplication(Class cls, VanillaLaunchArgs vanillaLaunchArgs) throws IOException, ClassNotFoundException {
         dependencyInjector = new DependencyInjector();
         try {
-            List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses();
-            List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses();
+            List<Class<?>> annotatedClasses = VanillaAnnotationProcessor.getClasses(cls.getPackageName(), vanillaLaunchArgs.excludeClassesContaining());
+            List<Class<?>> instantiatedClasses = VanillaAnnotationProcessor.getInstantiatedClasses(cls.getPackageName(), vanillaLaunchArgs.excludeClassesContaining());
             this.resolveInstantiatedDependencies(instantiatedClasses);
 
             dependencyInjector.registerDependencies(annotatedClasses);
