@@ -1,6 +1,4 @@
-
-
-# # Vanilla - A Lightweight IOC Framework
+## Vanilla - A Lightweight IOC Framework
 Vanilla is a lightweight and minimalistic IOC (Inversion of Control) framework designed to work seamlessly with modding frameworks such as Fabric.
 
 **#Features**
@@ -50,8 +48,6 @@ dependencies {
 }
 ```
 Adding the framework to your application. Notably the class containing the **main entry point** has to be a the top level of your project, that is the package containing all **your** classes. This is required for discovering and constructing the application context.
-
-![enter image description here](https://cdn.discordapp.com/attachments/943839120634052639/1057541826661326858/image.png)
 
 Below is an example of how to setup the **Vanilla Application Context.**
 ```java
