@@ -20,7 +20,7 @@ To use Vanilla, simply annotate your classes with @Vanilla and the framework wil
       // Other code here
     }
 ```
-It is possible to inject dependencies into Mixins as well. Classes annotated with both @Mixin and @Vanilla will not be accessible in the IOC registry. However it is still possible to inject dependencies from the IOC registry into your Mixin attributes.
+It is possible to inject dependencies into Mixins as well. Classes annotated with both @Mixin and @Vanilla will not be accessible in the IOC registry - THIS IS NOW POSSIBLE. As with normal @Vanilla classes it is possible to inject dependencies from the IOC registry into your attributes.
 
 **Example 2:**
 ```java
