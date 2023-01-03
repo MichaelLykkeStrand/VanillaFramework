@@ -30,7 +30,7 @@ It is possible to inject dependencies into Mixins as well. Classes annotated wit
       @VanillaAutoInject
       private Dependency dependency; // Will work!
       @VanillaAutoInject
-      private ExampleMixinClass myMixin // Won't work!
+      private ExampleMixinClass myMixin // Will work! - It is recommended that your mixin extends the same classes as the base class!
 
       // Other code here
     }
